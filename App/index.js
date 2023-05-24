@@ -1,7 +1,7 @@
-import Options from "./screens/Options";
+import Home from "./screens/Home";
 
-export default function Index(){
-  return(
-    <Options />
+export default function Index() {
+  return (
+    <Home />
   )
 }
