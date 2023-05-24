@@ -1,5 +1,8 @@
 export default {
     text: '#343434',
     border: '#e2e2e2',
-    blue: '#4f6d7a'
+    blue: '#4f6d7a',
+    white: '#fff',
+    offWhite: '#f0f0f0',
+    textLight: '#797979'
 }

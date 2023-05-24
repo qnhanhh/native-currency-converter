@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "eslint": "^7.32.0",
     "eslint-config-handlebarlabs": "^0.0.6",
     "expo": "~48.0.15",
