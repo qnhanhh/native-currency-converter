@@ -2,6 +2,7 @@ import { View, StyleSheet, StatusBar, Image, Dimensions, Text } from 'react-nati
 import colors from '../constants/colors'
 import { ConversionInput } from '../components/ConversionInput'
 import { format } from 'date-fns'
+import { Button } from '../components/Button'
 
 const screen = Dimensions.get('window')
 
@@ -81,6 +82,8 @@ export default function Home() {
             <Text style={styles.text}>
                 {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${format(date, "MMMM do, yyyy")}.`}
             </Text>
+
+            <Button text='Reverse currency' onPress={() => alert('a')} />
         </View>
     )
 }
