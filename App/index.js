@@ -1,7 +1,7 @@
-import Home from "./screens/Home";
+import Navigation from "./config/Navigation";
 
 export default function Index() {
   return (
-    <Home />
+    <Navigation />
   )
 }
