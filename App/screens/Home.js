@@ -87,14 +87,14 @@ export default function Home({ navigation }) {
                     <ConversionInput
                         text={baseCurrency}
                         value='123'
-                        onButtonPress={() => alert('press button')}
+                        onButtonPress={() => navigation.push('CurrencyList', {title: 'Base Currency'})}
                         onChangeText={text => console.log("text", text)}
                         keyboardType='numeric'
                     />
                     <ConversionInput
                         text={quoteCurrency}
                         value='123'
-                        onButtonPress={() => alert('press button')}
+                        onButtonPress={() => navigation.push('CurrencyList', {title: 'Quote Currency'})}
                         onChangeText={text => console.log("text", text)}
                         keyboardType='numeric'
                         editable={false}
