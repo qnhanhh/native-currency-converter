@@ -5,8 +5,9 @@ import colors from '../constants/colors'
 import { ConversionInput } from '../components/ConversionInput'
 import { format } from 'date-fns'
 import { Button } from '../components/Button'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { KeyboardSpacer } from '../components/KeyboardSpacer'
+import { ConversionContext } from '../util/ConversionContext'
 
 const screen = Dimensions.get('window')
 
@@ -53,15 +54,9 @@ export default function Home({ navigation }) {
     const conversionRate = 0.8345
     const date = new Date()
 
+    const { baseCurrency, quoteCurrency, swapCurrency } = useContext(ConversionContext)
     const [scroll, setScroll] = useState(false)
-    const [baseCurrency, setBaseCurrency] = useState('USD')
-    const [quoteCurrency, setQuoteCurrency] = useState('GBP')
     const [value, setValue] = useState('1000')
-
-    const swapCurrency = () => {
-        setBaseCurrency(quoteCurrency)
-        setQuoteCurrency(baseCurrency)
-    }
 
     return (
         <View style={styles.container}>
@@ -93,14 +88,20 @@ export default function Home({ navigation }) {
                     <ConversionInput
                         text={baseCurrency}
                         value={value}
-                        onButtonPress={() => navigation.push('CurrencyList', { title: 'Base Currency', activeCurrency: baseCurrency })}
+                        onButtonPress={() => navigation.push('CurrencyList', {
+                            title: 'Base Currency',
+                            isBaseCurrency: true
+                        })}
                         onChangeText={text => setValue(text)}
                         keyboardType='numeric'
                     />
                     <ConversionInput
                         text={quoteCurrency}
                         value={value && `${(parseFloat(value) * conversionRate).toFixed(2)}`}
-                        onButtonPress={() => navigation.push('CurrencyList', { title: 'Quote Currency', activeCurrency: quoteCurrency })}
+                        onButtonPress={() => navigation.push('CurrencyList', {
+                            title: 'Quote Currency',
+                            isBaseCurrency: false
+                        })}
                         keyboardType='numeric'
                         editable={false}
                     />
