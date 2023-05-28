@@ -50,12 +50,18 @@ const styles = StyleSheet.create({
 })
 
 export default function Home({ navigation }) {
-    const baseCurrency = 'USD'
-    const quoteCurrency = 'GBP'
     const conversionRate = 0.8345
     const date = new Date()
 
     const [scroll, setScroll] = useState(false)
+    const [baseCurrency, setBaseCurrency] = useState('USD')
+    const [quoteCurrency, setQuoteCurrency] = useState('GBP')
+    const [value, setValue] = useState('1000')
+
+    const swapCurrency = () => {
+        setBaseCurrency(quoteCurrency)
+        setQuoteCurrency(baseCurrency)
+    }
 
     return (
         <View style={styles.container}>
@@ -86,16 +92,15 @@ export default function Home({ navigation }) {
 
                     <ConversionInput
                         text={baseCurrency}
-                        value='123'
-                        onButtonPress={() => navigation.push('CurrencyList', {title: 'Base Currency'})}
-                        onChangeText={text => console.log("text", text)}
+                        value={value}
+                        onButtonPress={() => navigation.push('CurrencyList', { title: 'Base Currency', activeCurrency: baseCurrency })}
+                        onChangeText={text => setValue(text)}
                         keyboardType='numeric'
                     />
                     <ConversionInput
                         text={quoteCurrency}
-                        value='123'
-                        onButtonPress={() => navigation.push('CurrencyList', {title: 'Quote Currency'})}
-                        onChangeText={text => console.log("text", text)}
+                        value={value && `${(parseFloat(value) * conversionRate).toFixed(2)}`}
+                        onButtonPress={() => navigation.push('CurrencyList', { title: 'Quote Currency', activeCurrency: quoteCurrency })}
                         keyboardType='numeric'
                         editable={false}
                     />
@@ -104,7 +109,7 @@ export default function Home({ navigation }) {
                         {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${format(date, "MMMM do, yyyy")}.`}
                     </Text>
 
-                    <Button text='Reverse currency' onPress={() => alert('a')} />
+                    <Button text='Reverse currency' onPress={() => swapCurrency()} />
 
                     <KeyboardSpacer onToggle={(keyboardIsVisible) => setScroll(keyboardIsVisible)} />
                 </View>
